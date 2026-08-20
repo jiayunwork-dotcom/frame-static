@@ -16,7 +16,7 @@ func BuildSystem(m *model.Model) *System {
 	n := model.TotalDOF(m)
 	free := make([]int, 0, n)
 	fixed := make([]int, 0, n)
-	pos := make(map[int]int, n)
+	pos := newFreePos(n)
 	for i, node := range m.Nodes {
 		r := node.EffectiveRestraint()
 		for d := 0; d < 3; d++ {
@@ -24,7 +24,7 @@ func BuildSystem(m *model.Model) *System {
 			if r[d] {
 				fixed = append(fixed, dof)
 			} else {
-				pos[dof] = len(free)
+				recordFree(pos, dof, len(free))
 				free = append(free, dof)
 			}
 		}
