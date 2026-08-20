@@ -83,7 +83,5 @@ func (a Vec) Dot(b Vec) float64 {
 
 // Copy returns an independent copy of the vector.
 func (a Vec) Copy() Vec {
-	out := make(Vec, len(a))
-	copy(out, a)
-	return out
+	return copyAlias(a)
 }
