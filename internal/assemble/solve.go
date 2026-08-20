@@ -65,7 +65,7 @@ func buildResult(m *model.Model, sys *System, u linalg.Vec, K linalg.Mat, F lina
 		for a := 0; a < 6; a++ {
 			dg[a] = u[dofs[a]]
 		}
-		dl := element.Transform(g).MulVec(dg)
+		dl := localDisp(g, dg)
 		kLocal := element.LocalStiffness(g, e.E, e.A, e.I)
 		fl := kLocal.MulVec(dl)
 		if e.Dist != nil {
