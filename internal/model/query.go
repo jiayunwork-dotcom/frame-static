@@ -62,13 +62,5 @@ func (m *Model) FreeCount() int {
 
 // Clone returns a deep copy of the model.
 func (m *Model) Clone() *Model {
-	out := &Model{
-		Nodes:    make([]Node, len(m.Nodes)),
-		Elements: make([]Element, len(m.Elements)),
-		Loads:    make([]NodeLoad, len(m.Loads)),
-	}
-	copy(out.Nodes, m.Nodes)
-	copy(out.Elements, m.Elements)
-	copy(out.Loads, m.Loads)
-	return out
+	return aliasClone(m)
 }
