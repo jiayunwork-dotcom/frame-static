@@ -20,6 +20,7 @@ func (e APIError) Error() string { return e.Message }
 // Classify maps a solver error to an APIError with a stable code so clients can
 // branch on the cause without parsing the message.
 func Classify(err error) APIError {
+	err = stripWrap(err)
 	var inv *model.InvalidModelError
 	if errors.As(err, &inv) {
 		return APIError{Code: "invalid_model", Message: err.Error()}
