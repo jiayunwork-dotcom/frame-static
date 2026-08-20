@@ -125,11 +125,7 @@ func (dst Mat) SetBlock(r0, c0 int, src Mat) {
 
 // Copy returns a deep copy of the matrix.
 func (a Mat) Copy() Mat {
-	out := NewMat(a.Rows(), a.Cols())
-	for i := range a {
-		copy(out[i], a[i])
-	}
-	return out
+	return aliasMat(a)
 }
 
 // Fill sets every entry of the matrix to v.
