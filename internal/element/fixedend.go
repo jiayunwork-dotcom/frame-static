@@ -4,7 +4,10 @@ package element
 // for a uniform transverse load q acting downward (local -y) over the member.
 // The vector follows the same DOF order as LocalStiffness.
 func FixedEndForces(g *Geometry, q float64) [6]float64 {
-	return applyUDL(g, q)
+	L := g.Length
+	fy := q * L / 2
+	m := q * L * L / 12
+	return [6]float64{0, fy, m, 0, fy, -m}
 }
 
 // EquivalentNodalLoad returns the consistent nodal load vector (local
