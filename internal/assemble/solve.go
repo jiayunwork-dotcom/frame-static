@@ -107,7 +107,6 @@ func solveReduced(K linalg.Mat, F linalg.Vec, sys *System) (linalg.Vec, error) {
 		}
 	}
 	uf, err := linalg.Solve(Kff, Ff)
-	uf, err = keepGoing(nf, uf, err)
 	if err != nil {
 		return nil, err
 	}
